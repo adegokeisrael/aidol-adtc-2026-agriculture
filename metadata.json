@@ -1,0 +1,37 @@
+{
+  "team_id": "AIDOL",
+  "domain": "agriculture",
+  "language_scope": ["en"],
+  "african_alpha_claim": true,
+  "budget_laptop_claim": true,
+  "submitter": {
+    "name": "Adegoke Israel Adedolapo",
+    "email": "adegisrael198@gmail.com",
+    "github_handle": "EYEDOL"
+  },
+  "cross_disciplinary_pairing": {
+    "discipline": "agronomy_extension_services",
+    "load_bearing": true,
+    "description": "The model is fine-tuned on real agricultural advisory data (crop diagnosis, fertilizer/input calculation, pest management, market economics) covering smallholder farming practices relevant to Nigerian agriculture. The domain data is core to the model's training, combining agronomic subject knowledge with software engineering (distillation, quantization, offline deployment) to deliver expert-level advisory capability without connectivity dependence."
+  },
+  "test_prompts": [
+    {
+      "prompt_id": "tp_001",
+      "prompt": "Maize planted three weeks ago in Kaduna is showing yellowing leaves after a week of heavy rainfall. What could be the cause, and what should the farmer do?"
+    },
+    {
+      "prompt_id": "tp_002",
+      "prompt": "A farmer has 3.5 hectares of maize and wants to apply NPK fertilizer at a rate of 300kg per hectare. How much fertilizer is needed, and how many 50kg bags is that?"
+    }
+  ],
+  "model": {
+    "name": "AIDOL-Agri-Advisor-1.5B-Q4_K_M",
+    "runtime": "llama.cpp",
+    "quantization": "GGUF Q4_K_M",
+    "parameters_estimate": "1.5B",
+    "packaging": "binary_bundle"
+  },
+  "_runtime": {
+    "model_path": "model/model.gguf"
+  }
+}

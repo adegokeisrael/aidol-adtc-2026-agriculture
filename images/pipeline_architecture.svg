@@ -1,0 +1,182 @@
+<svg viewBox="0 0 1400 1750" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#4A4A4A"/>
+    </marker>
+    <linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2F5233"/>
+      <stop offset="100%" stop-color="#4E8C50"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1400" height="1750" fill="#FBFBF8"/>
+
+  <!-- Title banner -->
+  <rect x="0" y="0" width="1400" height="90" fill="url(#headerGrad)"/>
+  <text x="700" y="40" text-anchor="middle" fill="#FFFFFF" font-size="26" font-weight="700">AIDOL — Offline Agricultural Advisory Assistant</text>
+  <text x="700" y="68" text-anchor="middle" fill="#E4F0E0" font-size="15">ADTC 2026 Laptop LLM Challenge — Full Technical Pipeline</text>
+
+  <!-- ============ STAGE 1: DATA SOURCES ============ -->
+  <text x="60" y="135" font-size="16" font-weight="700" fill="#2F5233">1 — Data Sources</text>
+
+  <g font-size="12.5">
+    <rect x="60"  y="150" width="290" height="60" rx="10" fill="#DCEBFB" stroke="#3E7CB1" stroke-width="1.5"/>
+    <text x="205" y="175" text-anchor="middle" font-weight="600" fill="#1C3D5A">talhakk/agriculture-qa</text>
+    <text x="205" y="195" text-anchor="middle" fill="#3E5670">~25.4K rows — crop diagnosis</text>
+
+    <rect x="370" y="150" width="290" height="60" rx="10" fill="#DCEBFB" stroke="#3E7CB1" stroke-width="1.5"/>
+    <text x="515" y="175" text-anchor="middle" font-weight="600" fill="#1C3D5A">KisanVaani/agriculture-qa</text>
+    <text x="515" y="195" text-anchor="middle" fill="#3E5670">~22.6K rows — farmer-forum phrasing</text>
+
+    <rect x="680" y="150" width="290" height="60" rx="10" fill="#DCEBFB" stroke="#3E7CB1" stroke-width="1.5"/>
+    <text x="825" y="175" text-anchor="middle" font-weight="600" fill="#1C3D5A">AI4Agr/CROP-dataset</text>
+    <text x="825" y="195" text-anchor="middle" fill="#3E5670">30K rows, English-filtered (CJK regex)</text>
+
+    <rect x="990" y="150" width="290" height="60" rx="10" fill="#FDE8CC" stroke="#C97A1F" stroke-width="1.5"/>
+    <text x="1135" y="175" text-anchor="middle" font-weight="600" fill="#5A3A0F">Synthetic (code-generated)</text>
+    <text x="1135" y="195" text-anchor="middle" fill="#6B4A20">1,200 rows — arithmetic-verified</text>
+  </g>
+
+  <!-- converge lines -->
+  <path d="M205,210 L205,240 L700,240" stroke="#4A4A4A" stroke-width="1.5" fill="none"/>
+  <path d="M515,210 L515,240 L700,240" stroke="#4A4A4A" stroke-width="1.5" fill="none"/>
+  <path d="M825,210 L825,240 L700,240" stroke="#4A4A4A" stroke-width="1.5" fill="none"/>
+  <path d="M1135,210 L1135,240 L700,240" stroke="#4A4A4A" stroke-width="1.5" fill="none"/>
+  <line x1="700" y1="240" x2="700" y2="265" stroke="#4A4A4A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="500" y="270" width="400" height="55" rx="10" fill="#CDE7CF" stroke="#2F5233" stroke-width="1.5"/>
+  <text x="700" y="303" text-anchor="middle" font-weight="700" fill="#1E3A20" font-size="14">Combined + Deduplicated Training Corpus</text>
+
+  <line x1="700" y1="325" x2="700" y2="365" stroke="#4A4A4A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ============ STAGE 2: DISTILLATION ============ -->
+  <text x="60" y="400" font-size="16" font-weight="700" fill="#7A3B96">2 — Knowledge Distillation</text>
+
+  <rect x="180" y="415" width="300" height="80" rx="10" fill="#F1E3F7" stroke="#7A3B96" stroke-width="1.5"/>
+  <text x="330" y="445" text-anchor="middle" font-weight="700" fill="#4A1F63" font-size="14">Qwen2.5-7B-Instruct</text>
+  <text x="330" y="465" text-anchor="middle" fill="#5C3373" font-size="12.5">Teacher — frozen, 4-bit quantized</text>
+  <text x="330" y="482" text-anchor="middle" fill="#5C3373" font-size="12.5">Inference only, no gradients</text>
+
+  <rect x="920" y="415" width="300" height="80" rx="10" fill="#F1E3F7" stroke="#7A3B96" stroke-width="1.5"/>
+  <text x="1070" y="445" text-anchor="middle" font-weight="700" fill="#4A1F63" font-size="14">Qwen2.5-1.5B-Instruct</text>
+  <text x="1070" y="465" text-anchor="middle" fill="#5C3373" font-size="12.5">Student — QLoRA trainable</text>
+  <text x="1070" y="482" text-anchor="middle" fill="#5C3373" font-size="12.5">4-bit base + rank-16 adapter</text>
+
+  <rect x="480" y="415" width="440" height="80" rx="10" fill="#FFFFFF" stroke="#7A3B96" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="700" y="440" text-anchor="middle" font-weight="700" fill="#4A1F63" font-size="13">Response-Masked, Temperature-Scaled Loss</text>
+  <text x="700" y="460" text-anchor="middle" fill="#5C3373" font-size="12">L = a . CE(student, labels) + (1-a) . T&#178; . KL(teacher || student)</text>
+  <text x="700" y="478" text-anchor="middle" fill="#5C3373" font-size="11.5">Masked to assistant-response tokens only · vocab sliced to shared size (152064 vs 151936)</text>
+
+  <line x1="480" y1="435" x2="480" y2="455" stroke="#4A4A4A" stroke-width="1.5"/>
+  <path d="M480,455 L480,455" stroke="#4A4A4A"/>
+  <line x1="330" y1="495" x2="330" y2="515" stroke="#4A4A4A" stroke-width="1.5"/>
+  <line x1="330" y1="515" x2="480" y2="455" stroke="#4A4A4A" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="1070" y1="495" x2="1070" y2="515" stroke="#4A4A4A" stroke-width="1.5"/>
+  <line x1="1070" y1="515" x2="920" y2="455" stroke="#4A4A4A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <line x1="700" y1="495" x2="700" y2="535" stroke="#4A4A4A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="550" y="540" width="300" height="50" rx="10" fill="#F1E3F7" stroke="#7A3B96" stroke-width="1.5"/>
+  <text x="700" y="570" text-anchor="middle" font-weight="700" fill="#4A1F63" font-size="13.5">Distilled Student (1.5B)</text>
+
+  <line x1="700" y1="590" x2="700" y2="625" stroke="#4A4A4A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ============ STAGE 3: SFT ============ -->
+  <text x="60" y="655" font-size="16" font-weight="700" fill="#C97A1F">3 — Domain Fine-Tuning</text>
+
+  <rect x="450" y="670" width="500" height="65" rx="10" fill="#FDE8CC" stroke="#C97A1F" stroke-width="1.5"/>
+  <text x="700" y="698" text-anchor="middle" font-weight="700" fill="#5A3A0F" font-size="14">Supervised Fine-Tuning — QLoRA (rank 16)</text>
+  <text x="700" y="718" text-anchor="middle" fill="#6B4A20" font-size="12.5">Agriculture domain corpus + escalation-note augmentation (~70% of diagnosis/pest examples)</text>
+
+  <line x1="700" y1="735" x2="700" y2="770" stroke="#4A4A4A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="550" y="775" width="300" height="50" rx="10" fill="#FDE8CC" stroke="#C97A1F" stroke-width="1.5"/>
+  <text x="700" y="805" text-anchor="middle" font-weight="700" fill="#5A3A0F" font-size="13.5">Merged Model (fp16)</text>
+
+  <line x1="700" y1="825" x2="700" y2="860" stroke="#4A4A4A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ============ STAGE 4: GGUF + QUANTIZATION ============ -->
+  <text x="60" y="890" font-size="16" font-weight="700" fill="#1E7A72">4 — Conversion &amp; Quantization</text>
+
+  <rect x="550" y="905" width="300" height="50" rx="10" fill="#D2F1EE" stroke="#1E7A72" stroke-width="1.5"/>
+  <text x="700" y="935" text-anchor="middle" font-weight="700" fill="#0F4C47" font-size="13.5">GGUF Conversion (f16)</text>
+
+  <line x1="700" y1="955" x2="700" y2="985" stroke="#4A4A4A" stroke-width="1.5"/>
+  <line x1="400" y1="985" x2="1000" y2="985" stroke="#4A4A4A" stroke-width="1.5"/>
+  <line x1="400" y1="985" x2="400" y2="1010" stroke="#4A4A4A" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="1000" y1="985" x2="1000" y2="1010" stroke="#4A4A4A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="250" y="1015" width="300" height="55" rx="10" fill="#D2F1EE" stroke="#1E7A72" stroke-width="1.5"/>
+  <text x="400" y="1048" text-anchor="middle" font-weight="700" fill="#0F4C47" font-size="14">Q4_K_M</text>
+
+  <rect x="850" y="1015" width="300" height="55" rx="10" fill="#D2F1EE" stroke="#1E7A72" stroke-width="1.5"/>
+  <text x="1000" y="1048" text-anchor="middle" font-weight="700" fill="#0F4C47" font-size="14">Q5_K_M</text>
+
+  <line x1="400" y1="1070" x2="400" y2="1100" stroke="#4A4A4A" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="1000" y1="1070" x2="1000" y2="1100" stroke="#4A4A4A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ============ STAGE 5: PROFILING ============ -->
+  <text x="60" y="1130" font-size="16" font-weight="700" fill="#B5323F">5 — Evaluation (adtc-profiler)</text>
+
+  <rect x="250" y="1145" width="300" height="80" rx="10" fill="#FADADD" stroke="#B5323F" stroke-width="1.5"/>
+  <text x="400" y="1170" text-anchor="middle" font-weight="700" fill="#7A1F29" font-size="13">TPS 10.24 · RAM 1.67GB</text>
+  <text x="400" y="1190" text-anchor="middle" fill="#8A2A34" font-size="12.5">Accuracy (arc_easy): 0.70</text>
+  <text x="400" y="1208" text-anchor="middle" fill="#8A2A34" font-size="12">Selected variant</text>
+
+  <rect x="850" y="1145" width="300" height="80" rx="10" fill="#FADADD" stroke="#B5323F" stroke-width="1.5"/>
+  <text x="1000" y="1170" text-anchor="middle" font-weight="700" fill="#7A1F29" font-size="13">TPS 9.44 · RAM 1.23GB</text>
+  <text x="1000" y="1190" text-anchor="middle" fill="#8A2A34" font-size="12.5">Accuracy (arc_easy): 0.62</text>
+  <text x="1000" y="1208" text-anchor="middle" fill="#8A2A34" font-size="12">Not selected</text>
+
+  <line x1="400" y1="1225" x2="400" y2="1260" stroke="#4A4A4A" stroke-width="1.5"/>
+  <line x1="400" y1="1260" x2="700" y2="1260" stroke="#4A4A4A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ============ STAGE 6: DOMAIN COMPARISON ============ -->
+  <text x="60" y="1300" font-size="16" font-weight="700" fill="#8C5A1E">6 — Cross-Domain Comparison</text>
+
+  <rect x="250" y="1315" width="450" height="70" rx="10" fill="#FCEFDA" stroke="#8C5A1E" stroke-width="1.5"/>
+  <text x="475" y="1340" text-anchor="middle" font-weight="700" fill="#5A3A0F" font-size="13.5">Agriculture</text>
+  <text x="475" y="1360" text-anchor="middle" fill="#6B4A20" font-size="12">Correct, on-persona across all test prompts</text>
+  <text x="475" y="1376" text-anchor="middle" fill="#1E7A2F" font-weight="700" font-size="12">SELECTED</text>
+
+  <rect x="720" y="1315" width="450" height="70" rx="10" fill="#F4E4E4" stroke="#8C1E1E" stroke-width="1.5"/>
+  <text x="945" y="1340" text-anchor="middle" font-weight="700" fill="#5A0F0F" font-size="13.5">Healthcare &amp; Medical</text>
+  <text x="945" y="1360" text-anchor="middle" fill="#6B2020" font-size="12">Repetition-loop failures; unsafe diagnostic-ordering behavior</text>
+  <text x="945" y="1376" text-anchor="middle" fill="#B01E1E" font-weight="700" font-size="12">REJECTED</text>
+
+  <line x1="475" y1="1385" x2="475" y2="1420" stroke="#4A4A4A" stroke-width="1.5"/>
+  <line x1="475" y1="1420" x2="700" y2="1420" stroke="#4A4A4A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ============ STAGE 7: FINAL SUBMISSION ============ -->
+  <rect x="450" y="1440" width="500" height="90" rx="12" fill="url(#headerGrad)"/>
+  <text x="700" y="1475" text-anchor="middle" fill="#FFFFFF" font-weight="700" font-size="17">Final Submission</text>
+  <text x="700" y="1500" text-anchor="middle" fill="#E4F0E0" font-size="13">AIDOL-Agri-Advisor-1.5B-Q4_K_M</text>
+  <text x="700" y="1518" text-anchor="middle" fill="#E4F0E0" font-size="12">Domain: Agriculture · Runtime: llama.cpp · Format: GGUF</text>
+
+  <!-- Legend -->
+  <g font-size="12">
+    <rect x="60" y="1580" width="18" height="18" rx="4" fill="#DCEBFB" stroke="#3E7CB1"/>
+    <text x="85" y="1594" fill="#333333">Data Sources</text>
+
+    <rect x="220" y="1580" width="18" height="18" rx="4" fill="#F1E3F7" stroke="#7A3B96"/>
+    <text x="245" y="1594" fill="#333333">Distillation</text>
+
+    <rect x="380" y="1580" width="18" height="18" rx="4" fill="#FDE8CC" stroke="#C97A1F"/>
+    <text x="405" y="1594" fill="#333333">Fine-Tuning</text>
+
+    <rect x="540" y="1580" width="18" height="18" rx="4" fill="#D2F1EE" stroke="#1E7A72"/>
+    <text x="565" y="1594" fill="#333333">Conversion / Quantization</text>
+
+    <rect x="800" y="1580" width="18" height="18" rx="4" fill="#FADADD" stroke="#B5323F"/>
+    <text x="825" y="1594" fill="#333333">Profiler Evaluation</text>
+
+    <rect x="980" y="1580" width="18" height="18" rx="4" fill="#FCEFDA" stroke="#8C5A1E"/>
+    <text x="1005" y="1594" fill="#333333">Domain Comparison</text>
+
+    <rect x="1180" y="1580" width="18" height="18" rx="4" fill="#2F5233"/>
+    <text x="1205" y="1594" fill="#333333">Final Output</text>
+  </g>
+
+  <text x="700" y="1650" text-anchor="middle" fill="#999999" font-size="12">Africa Deep Tech Challenge 2026 — Team AIDOL — Agriculture Domain</text>
+  <text x="700" y="1670" text-anchor="middle" fill="#B0B0B0" font-size="11">Qwen2.5-1.5B-Instruct · Distilled from Qwen2.5-7B-Instruct · llama.cpp / GGUF · 100% Offline</text>
+</svg>
