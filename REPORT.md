@@ -1,6 +1,6 @@
 # Technical Report — AIDOL Agricultural Advisory Assistant
 
-**Team ID:** AIDOL
+**Team ID:** AgriMind: Offline AI Model for African Farmers
 **Submitter:** Adegoke Israel Adedolapo
 **Domain:** Agriculture — Crop, Pest, Input-Cost, and Market Advisory
 **Model:** AIDOL-Agri-Advisor-1.5B-Q4_K_M
