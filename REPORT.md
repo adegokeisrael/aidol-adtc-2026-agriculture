@@ -224,13 +224,13 @@ Measured via `adtc-profiler run --mode participant`, full run including accuracy
 | Metric | Q4_K_M (submitted) | Q5_K_M (evaluated, not submitted) |
 |---|---|---|
 | Generation speed (`throughput.tokens_per_second_generation`) | **10.24 tok/sec** | 9.44 tok/sec |
-| First-token latency (512-token prompt) | 16,473.99 ms | — |
+| First-token latency (512-token prompt) | 16,473.99 ms | 32361.65 |
 | Peak RSS (`memory.peak_rss_mb`) | 1714.29 MB (≈1.67 GB) | 1257.74 MB (≈1.23 GB) |
-| Steady-state RSS | 1635.33 MB | — |
+| Steady-state RSS | 1635.33 MB | 1179.07 |
 | Accuracy — `arc_easy` smoke test, 50 samples (`acc_norm`) | **0.70** | 0.62 |
-| CPU utilization (p99) | 61.9% | — |
+| CPU utilization (p99) | 61.9% | 70.1 |
 | Thermal throttling | Not detected (`throttled: false`); `core_temp_c_peak` reads `null` — cloud CPU environment does not expose hardware thermal sensors, so this reflects absence of data rather than a confirmed measurement on physical laptop hardware | — |
-| GGUF parameter count | 1,543,714,304 (matches claimed 1.5B estimate; `params_match: true`) | — |
+| GGUF parameter count | 1,543,714,304 (matches claimed 1.5B estimate; `params_match: true`) |  1,543,714,304 (matches claimed 1.5B estimate; `params_match: true`) |
 | Est. S_perf | 68.3 | 62.9 |
 | Est. S_eff | 76.1 | 82.5 |
 | **Est. S_total** | **≈ 70.7** | ≈ 66.4 |
