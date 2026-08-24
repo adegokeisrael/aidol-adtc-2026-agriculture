@@ -16,7 +16,7 @@
 ![License](https://img.shields.io/badge/License-Apache%202.0-green)
 ![Competition](https://img.shields.io/badge/ADTC-2026-2F5233)
 
-**Team:** AIDOL &nbsp;·&nbsp; **Submitter:** Adegoke Israel Adedolapo &nbsp;·&nbsp; **Domain:** Agriculture &nbsp;·&nbsp; **Challenge:** Africa Deep Tech Challenge 2026 — The Laptop LLM Challenge
+**Team:** AgriMind: Offline AI Model for African Farmers &nbsp;·&nbsp; **Submitter:** Adegoke Israel Adedolapo &nbsp;·&nbsp; **Domain:** Agriculture &nbsp;·&nbsp; **Challenge:** Africa Deep Tech Challenge 2026 — The Laptop LLM Challenge
 
 An offline, single-turn agricultural advisory assistant covering crop diagnosis, fertilizer/input calculation, pest management, and market economics — built to run entirely on an 8GB commodity laptop with **zero cloud dependency**, for smallholder farmers and extension officers who cannot rely on stable connectivity.
 
